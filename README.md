@@ -1,3 +1,5 @@
+![Java CI](https://github.com/KelianHalleray/bg-eraser/actions/workflows/java.yml/badge.svg)
+
 # Java Background Remover
 
 A personal Java project to learn image processing by building a background removal pipeline from scratch.
@@ -101,7 +103,7 @@ More challenging cases—such as hair, fur, transparent objects, or complex outl
 - [ ] Improve the background detection algorithm
 - [ ] Add mask post-processing (noise removal, smoothing)
 - [ ] Increase edge quality around the subject
-- [ ] Write comprehensive unit tests
+- [x] Write comprehensive unit tests
 - [ ] Add a command-line interface
 - [ ] Support additional image formats (WebP, TIFF, ...)
 - [ ] Improve project documentation
