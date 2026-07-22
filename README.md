@@ -15,7 +15,8 @@ This project focuses on learning concepts such as image representation, pixel ma
 ## Features
 
 - Load an image
-- Detect the background
+- Estimate the background color from image borders
+- Classify pixels using RGB color distance
 - Generate a binary mask
 - Apply transparency
 - Export the result as a PNG image
@@ -42,7 +43,7 @@ flowchart TD
 
 - Java 25
 - Maven
-- JUnit *(in progress)*
+- JUnit 5
 
 ## Installation
 
@@ -89,21 +90,29 @@ Throughout this project, I learned about:
 - Separation of responsibilities (SRP)
 - Custom exception handling
 - Building a modular application with Maven
+- RGB color distance
+- Background color estimation from image borders
+- Unit testing with JUnit 5
+- Continuous integration with GitHub Actions
 
 ## Current Limitations
 
 The current implementation works best with images that have a relatively uniform background.
 
-More challenging cases—such as hair, fur, transparent objects, or complex outlines—are not yet handled accurately. Improving the detection algorithm is one of the main objectives for future versions.
+Pixels near subject edges may still contain traces of the original background color, especially around hair and other fine details. 
+This can produce a visible color halo because the current mask is binary and does not yet support partial transparency or color spill correction.
 
 ## Roadmap
-
 ### Planned Improvements
 
-- [ ] Improve the background detection algorithm
-- [ ] Add mask post-processing (noise removal, smoothing)
+- [x] Improve the background detection algorithm using border color estimation
+- [ ] Make the background tolerance configurable
+- [ ] Add mask post-processing (noise removal, erosion, dilation, smoothing)
+- [ ] Support partial transparency around subject edges
+- [ ] Add green spill suppression
 - [ ] Increase edge quality around the subject
 - [x] Write comprehensive unit tests
+- [x] Add continuous integration with GitHub Actions
 - [ ] Add a command-line interface
 - [ ] Support additional image formats (WebP, TIFF, ...)
 - [ ] Improve project documentation
