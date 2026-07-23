@@ -18,6 +18,7 @@ This project focuses on learning concepts such as image representation, pixel ma
 - Estimate the background color from image borders
 - Classify pixels using RGB color distance
 - Generate a binary mask
+- Post-process the binary mask using neighborhood majority filtering
 - Apply transparency
 - Export the result as a PNG image
 
@@ -28,15 +29,17 @@ flowchart TD
     A["ImageLoader<br/><small>Loads the source image from disk.</small>"]
         --> B["ImageData<br/><small>Stores the image pixels and metadata.</small>"]
 
-    B --> C["BackgroundDetector<br/><small>Detects background pixels based on configurable criteria.</small>"]
+    B --> C["BackgroundDetector<br/><small>Estimates the background color and classifies pixels.</small>"]
 
     C --> D["Mask<br/><small>Represents foreground and background pixel classification.</small>"]
 
-    D --> E["TransparencyApplier<br/><small>Applies transparency to background pixels using the mask.</small>"]
+    D --> E["MaskProcessor<br/><small>Removes isolated pixels using neighborhood majority filtering.</small>"]
 
-    E --> F["BufferedImage<br/><small>Produces the final image with an alpha channel.</small>"]
+    E --> F["TransparencyApplier<br/><small>Applies transparency using the processed mask.</small>"]
 
-    F --> G["ImageExporter<br/><small>Writes the processed image to the output file.</small>"]
+    F --> G["BufferedImage<br/><small>Contains the final image with an alpha channel.</small>"]
+
+    G --> H["ImageExporter<br/><small>Writes the processed image to the output file.</small>"]
 ```
 
 ## Technologies
@@ -107,7 +110,9 @@ This can produce a visible color halo because the current mask is binary and doe
 
 - [x] Improve the background detection algorithm using border color estimation
 - [ ] Make the background tolerance configurable
-- [ ] Add mask post-processing (noise removal, erosion, dilation, smoothing)
+- [x] Remove isolated mask pixels using neighborhood majority filtering
+- [ ] Add erosion and dilation
+- [ ] Add mask edge smoothing
 - [ ] Support partial transparency around subject edges
 - [ ] Add green spill suppression
 - [ ] Increase edge quality around the subject
